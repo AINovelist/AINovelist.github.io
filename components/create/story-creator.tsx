@@ -40,7 +40,7 @@ export function StoryCreator() {
                 id="title"
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
-                placeholder="Enter a title for your story"
+                placeholder="قصه شما چه اسمی داشته باشد؟"
               />
             </div>
 
@@ -87,7 +87,7 @@ export function StoryCreator() {
             </div>
 
             <Button type="submit" className="w-full" disabled={isGenerating}>
-              {isGenerating ? 'Creating Story...' : 'Generate Story'}
+              {isGenerating ? 'در حال ساختن قصه' : 'شروع به قصه گویی'}
             </Button>
           </form>
         </Card>
