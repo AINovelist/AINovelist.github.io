@@ -8,10 +8,13 @@ export interface Feature {
 
 export interface StoryForm {
   title: string;
+  sex: 'male' | 'female';
   ageRange: number[];
   theme: string;
   characters: string;
   additionalNotes: string;
+  environmentalTopic: string;
+  livingEnvironment: string;
 }
 
 export interface Story {
@@ -22,4 +25,7 @@ export interface Story {
   theme: string;
   coverImage: string;
   topic: string;
+  sex: 'male' | 'female';
+  environmentalTopic: string;
+  livingEnvironment: string;
 }
