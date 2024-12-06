@@ -30,7 +30,7 @@ export function StoryCreator() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-8 text-3xl font-bold">Create Your Story</h1>
+      <h1 className="mb-8 text-3xl font-bold">قصه‌تان را بسازید</h1>
       <div className="grid gap-8 md:grid-cols-2">
         <Card className="p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -45,7 +45,7 @@ export function StoryCreator() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="age-range">سن: {form.ageRange[0]} years</Label>
+              <Label htmlFor="age-range">سن: {form.ageRange[0]} ساله</Label>
               <Slider
                 id="age-range"
                 value={form.ageRange}
