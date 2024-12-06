@@ -4,12 +4,12 @@ import { cn } from '@/lib/utils';
 const imageTypeMapping: { [key: string]: string } = {
   '3d_rendered': 'سه بعدی',
   cartoon: 'کارتونی',
-  chibi: 'Chibi',
+  chibi: 'فانتزی',
   'flat_design': 'تخت',
-  'hand_drawn': 'دستی',
+  'hand_drawn': 'دست‌ساز',
   real: 'رئال',
-  'storybook_illustration': 'Storybook Illustration',
-  'vector_art': 'Vector Art',
+  'storybook_illustration': 'تصویرسازی',
+  'vector_art': 'وکتور',
   watercolor: 'آبرنگ',
 };
 
@@ -36,7 +36,7 @@ export function ImageTypeButtons({ onImageTypeChange }: ImageTypeButtonsProps) {
             'px-4 py-2 rounded-md transition-colors',
             activeImageType === type
               ? 'bg-primary text-primary-foreground'
-              : 'hover:bg-primary/10'
+              : 'border hover:bg-primary/10'
           )}
           onClick={() => handleImageTypeClick(type)}
         >

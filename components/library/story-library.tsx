@@ -10,6 +10,7 @@ import { Story } from '@/lib/types';
 export function StoryLibrary() {
   const [searchQuery, setSearchQuery] = useState('');
   const [stories, setStories] = useState<Story[]>([]);
+  const [selectedTopic, setSelectedTopic] = useState('all');
   const [imageType, setImageType] = useState('3d_rendered');
 
   useEffect(() => {
