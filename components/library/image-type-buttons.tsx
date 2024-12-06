@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { Button } from '../ui/button';
 
 const imageTypeMapping: { [key: string]: string } = {
   '3d_rendered': 'سه بعدی',
@@ -30,18 +31,13 @@ export function ImageTypeButtons({ onImageTypeChange }: ImageTypeButtonsProps) {
   return (
     <div className="flex flex-wrap justify-center gap-2 mb-4">
       {imageTypes.map((type) => (
-        <button
+        <Button
           key={type}
-          className={cn(
-            'px-4 py-2 rounded-md transition-colors',
-            activeImageType === type
-              ? 'bg-primary text-primary-foreground'
-              : 'border hover:bg-primary/10'
-          )}
+          variant={activeImageType === type ? 'default' : 'outline'}
           onClick={() => handleImageTypeClick(type)}
         >
           {imageTypeMapping[type]}
-        </button>
+        </Button>
       ))}
     </div>
   );

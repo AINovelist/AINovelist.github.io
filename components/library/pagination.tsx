@@ -35,7 +35,8 @@ export function Pagination({
           <Button
             key={page}
             onClick={() => handlePageChange(page)}
-            color={page === currentPage ? 'primary' : 'secondary'}
+            // color={page === currentPage ? 'primary' : 'secondary'}
+            variant={page === currentPage ? 'destructive' : 'outline'}
           >
             {page}
           </Button>
@@ -47,7 +48,8 @@ export function Pagination({
             <Button
               key={itemsPerPage}
               onClick={() => handleItemsPerPageChange(itemsPerPage)}
-              color={itemsPerPage === selectedItemsPerPage ? 'primary' : 'secondary'}
+              // color={itemsPerPage === selectedItemsPerPage ? 'primary' : 'secondary'}
+              variant={itemsPerPage === selectedItemsPerPage ? 'default' : 'outline'}
             >
               {itemsPerPage}
             </Button>
