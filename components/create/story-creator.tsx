@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -216,7 +216,6 @@ export function StoryCreator() {
             </Button>
           </form>
         </Card>
-        <div>
           {showPreview ? (
             <StoryPreview
               form={form}
@@ -225,6 +224,8 @@ export function StoryCreator() {
             />
           ) : (
             <Card className="p-6">
+              <CardHeader>
+              </CardHeader>
               {apiResponse && apiResponse.aiResponse ? (
                 <div className="space-y-4">{apiResponse.aiResponse}</div>
               ) : (
@@ -234,6 +235,5 @@ export function StoryCreator() {
           )}
         </div>
       </div>
-    </div>
   );
 }

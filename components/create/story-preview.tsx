@@ -1,4 +1,10 @@
-import { Card } from "@/components/ui/card";
+import {
+  Card,
+  CardBackground,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { StoryForm } from "@/lib/types";
 
 interface StoryPreviewProps {
@@ -66,44 +72,53 @@ export function StoryPreview({
 }: StoryPreviewProps) {
   return (
     <Card className="p-6">
-      <h2 className="mb-4 text-xl font-semibold">پیش نمایش</h2>
-      <div className="space-y-4">
-        {/* ... */}
-        <div>
-          <h3 className="font-medium">عنوان</h3>
-          <p className="text-muted-foreground">{form.title || "قصه"}</p>
+      <CardBackground
+        style={{
+          backgroundImage:
+            "url(https://github.com/AINovelist/stories/blob/main/kids/Tree%20Preservation/images/nazanin-10-in-mountainous-area-7657810281-vector_art.png?raw=true)",
+        }}
+      />
+      <CardContent>
+        <h3 className="font-medium">پیش نمایش </h3>
+        <div className="space-y-4">
+          {/* ... */}
+          <div>
+            <h3 className="font-medium">عنوان</h3>
+            <p className="text-muted-foreground">{form.title || "قصه"}</p>
+          </div>
+          <div>
+            <h3 className="font-medium">جنسیت</h3>
+            <p className="text-muted-foreground">
+              {form.sex === "male"
+                ? "پسر"
+                : form.sex === "female"
+                ? "دختر"
+                : "نامشخص"}
+            </p>
+          </div>
+          <div>
+            <h3 className="font-medium">رده سنی</h3>{" "}
+            <p className="text-muted-foreground">{form.ageRange[0]} ساله</p>
+          </div>
+          <div>
+            <h3 className="font-medium">موضوع زیست محیطی</h3>
+            <p className="text-muted-foreground">
+              {form.environmentalTopic
+                ? environmentalTopicsMap[form.environmentalTopic] || "نامعلوم"
+                : "نامعلوم"}
+            </p>
+          </div>
+          <div>
+            <h3 className="font-medium">محیط زندگی</h3>
+            <p className="text-muted-foreground">
+              {form.livingEnvironment
+                ? livingEnvironmentsMap[form.livingEnvironment] || "نامعلوم"
+                : "نامعلوم"}
+            </p>
+          </div>
+          {/* ... */}
         </div>
-        <div>
-          <h3 className="font-medium">جنسیت</h3>
-          <p className="text-muted-foreground">
-            {form.sex === "male"
-              ? "پسر"
-              : form.sex === "female"
-              ? "دختر"
-              : "نامشخص"}
-          </p>
-        </div>
-        <div>
-           <h3 className="font-medium">رده سنی</h3>           <p className="text-muted-foreground">{form.ageRange[0]} ساله</p>
-         </div>
-        <div>
-          <h3 className="font-medium">موضوع زیست محیطی</h3>
-          <p className="text-muted-foreground">
-            {form.environmentalTopic
-              ? environmentalTopicsMap[form.environmentalTopic] || "نامعلوم"
-              : "نامعلوم"}
-          </p>
-        </div>
-        <div>
-          <h3 className="font-medium">محیط زندگی</h3>
-          <p className="text-muted-foreground">
-            {form.livingEnvironment
-              ? livingEnvironmentsMap[form.livingEnvironment] || "نامعلوم"
-              : "نامعلوم"}
-          </p>
-        </div>
-        {/* ... */}
-      </div>
+      </CardContent>
     </Card>
   );
 }
