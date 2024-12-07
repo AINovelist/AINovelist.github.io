@@ -66,7 +66,7 @@ export function StoryDetail({ story }: StoryDetailProps) {
 
           <div className="flex flex-wrap gap-2 mb-4">
             <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
-              Age: {story.ageRange}+
+              سن: {story.ageRange}+
             </span>
             <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
               {story.theme}
