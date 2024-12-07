@@ -25,7 +25,7 @@ const IMAGE_STYLES = [
 ] as const;
 
 export function StoryDetail({ story }: StoryDetailProps) {
-  const initialStyle = story.images ? 'storybook_illustration' : 'storybook_illustration'; // Default style
+  const initialStyle = story.images ? '3d_rendered' : '3d_rendered'; // Default style
   const [selectedStyle, setSelectedStyle] = useState<keyof StoryImages>(initialStyle);
 
   return (

@@ -10,11 +10,11 @@ export async function fetchStories(): Promise<Story[]> {
   return data.map((item) => ({
     id: item.name.replace('.md', ''),
     title: formatTitle(item.name),
-    description: `A story about ${item.topic}`,
+    description: `قصه‌ای درباره‌ی ${item.topic}`,
     ageRange: extractAgeFromFilename(item.name),
     theme: item.topic,
     topic: item.topic,
-    coverImage: getImageUrl(item.topic, item.name, 'cartoon'),
+    coverImage: getImageUrl(item.topic, item.name, '3d_rendered'),
     images: {
       ...item.images,
       cartoon: getImageUrl(item.topic, item.name, 'cartoon'),
