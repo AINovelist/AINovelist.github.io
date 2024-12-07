@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import { Story } from '@/lib/types';
+import { Story, StoryImages } from '@/lib/types';
 import { useState } from 'react';
 
 interface StoryDetailProps {
@@ -25,7 +25,8 @@ const IMAGE_STYLES = [
 ] as const;
 
 export function StoryDetail({ story }: StoryDetailProps) {
-  const [selectedStyle, setSelectedStyle] = useState<keyof typeof story.images>('storybook_illustration');
+  const initialStyle = story.images ? 'storybook_illustration' : 'storybook_illustration'; // Default style
+  const [selectedStyle, setSelectedStyle] = useState<keyof StoryImages>(initialStyle);
 
   return (
     <div className="container mx-auto px-4 py-8">
