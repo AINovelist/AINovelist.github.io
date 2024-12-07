@@ -1,58 +1,51 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { StoryGrid } from '@/components/library/story-grid';
 import { StoryFilters } from '@/components/library/story-filters';
-import { ImageTypeButtons } from '@/components/library/image-type-buttons';
+import { TopicFilters } from '@/components/library/topic-filters';
+import { Pagination } from '@/components/ui/pagination';
 import { Story } from '@/lib/types';
-import { Pagination } from '@/components/library/pagination'; // New component
 
-export function StoryLibrary() {
+interface StoryLibraryProps {
+  initialStories: Story[];
+}
+
+const ITEMS_PER_PAGE = 9;
+
+export function StoryLibrary({ initialStories }: StoryLibraryProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [stories, setStories] = useState<Story[]>([]);
   const [selectedTopic, setSelectedTopic] = useState('all');
-  const [imageType, setImageType] = useState('3d_rendered');
-  const [currentPage, setCurrentPage] = useState(1); // New state
-  const [itemsPerPage, setItemsPerPage] = useState(6); // New state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [stories] = useState<Story[]>(initialStories);
 
-  useEffect(() => {
-    const fetchStories = async () => {
-      try {
-        const response = await fetch('https://github-worker.javidmomeni.workers.dev/');
-        const data = await response.json();
-        const stories: Story[] = data.map((item: any) => ({
-          id: item.name,
-          title: item.title,
-          description: item.description,
-          ageRange: item.ageRange,
-          theme: item.theme,
-          topic: item.topic,
-        }));
-        setStories(stories);
-      } catch (error) {
-        console.error('Error fetching stories:', error);
-      }
-    };
-    fetchStories();
-  }, []);
+  const filteredStories = stories.filter((story) => {
+    const matchesSearch = story.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         story.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesTopic = selectedTopic === 'all' || story.topic === selectedTopic;
+    return matchesSearch && matchesTopic;
+  });
 
-  const handleImageTypeChange = (type: string) => {
-    setImageType(type);
-  };
+  const totalPages = Math.ceil(filteredStories.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedStories = filteredStories.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleItemsPerPageChange = (itemsPerPage: number) => {
-    setItemsPerPage(itemsPerPage);
+  // Reset to first page when filters change
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
   };
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = stories.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(stories.length / itemsPerPage);
+  const handleTopicChange = (topic: string) => {
+    setSelectedTopic(topic);
+    setCurrentPage(1);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -63,21 +56,26 @@ export function StoryLibrary() {
           placeholder="جستجوی قصه‌ها..."
           className="max-w-xs"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => handleSearch(e.target.value)}
         />
       </div>
-      <ImageTypeButtons onImageTypeChange={handleImageTypeChange} />
+
+      <TopicFilters
+        selectedTopic={selectedTopic}
+        onTopicChange={handleTopicChange}
+      />
+
       <div className="grid gap-8 md:grid-cols-4">
         <StoryFilters className="md:col-span-1" />
-        <div className="md:col-span-3">
-          <StoryGrid stories={currentItems} imageType={imageType} />
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            itemsPerPage={itemsPerPage}
-            onPageChange={handlePageChange}
-            onItemsPerPageChange={handleItemsPerPageChange}
-          />
+        <div className="md:col-span-3 space-y-8">
+          <StoryGrid stories={paginatedStories} />
+          {totalPages > 1 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          )}
         </div>
       </div>
     </div>

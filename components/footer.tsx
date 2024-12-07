@@ -9,22 +9,30 @@ export function Footer() {
           <BookOpenCheck className="h-6 w-6 text-primary" />
           <span className="text-lg font-bold">AiNovelist</span>
         </div>
-        <nav className="mt-8 columns-2 sm:flex sm:justify-center sm:space-x-12 mb-6" aria-label="Footer">
-            <Link href="/about" className="ml-6 text-sm leading-6 text-foreground hover:text-primary">
-              درباره ما
+        <nav className="mt-8 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
+          <div className="pb-6">
+            <Link href="/about" className="text-sm leading-6 text-foreground hover:text-primary">
+              About Us
             </Link>
+          </div>
+          <div className="pb-6">
             <Link href="/privacy" className="text-sm leading-6 text-foreground hover:text-primary">
-              حریم خصوصی
+              Privacy Policy
             </Link>
+          </div>
+          <div className="pb-6">
             <Link href="/terms" className="text-sm leading-6 text-foreground hover:text-primary">
-              قوانین
+              Terms of Service
             </Link>
+          </div>
+          <div className="pb-6">
             <Link href="/contact" className="text-sm leading-6 text-foreground hover:text-primary">
-              ارتباط
+              Contact Us
             </Link>
+          </div>
         </nav>
         <p className="mt-8 text-center text-xs leading-5 text-muted-foreground">
-          &copy; {new Date().getFullYear()} AiNovelist.
+          &copy; {new Date().getFullYear()} AiNovelist. All rights reserved.
         </p>
       </div>
     </footer>

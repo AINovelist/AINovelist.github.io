@@ -15,12 +15,12 @@ export function HeroSection() {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link href="/create">
               <Button size="lg" className="text-lg">
-                قصه گو
+              قصه گو
               </Button>
             </Link>
             <Link href="/library">
               <Button size="lg" variant="outline" className="text-lg">
-                کتابخانه
+              کتابخانه
               </Button>
             </Link>
           </div>

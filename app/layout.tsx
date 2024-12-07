@@ -10,8 +10,8 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata: Metadata = {
-  title: 'قصه‌پرداز: سفر به دنیای داستان‌های جادویی برای کودکان',
-  description: 'جرقه‌ای برای تخیل کودک شما، با هر داستانی که هوش مصنوعی خلق می‌کند',
+  title: 'AiNovelist - AI-Powered Stories for Kids',
+  description: 'Create magical stories for children with the power of AI',
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fa" dir='rtl' suppressHydrationWarning>
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
       <body className={`${vazirmatn.variable} font-sans`} suppressHydrationWarning>
         <div className="flex min-h-screen flex-col">
           <Header />

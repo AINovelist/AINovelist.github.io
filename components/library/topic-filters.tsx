@@ -8,12 +8,11 @@ interface TopicFiltersProps {
 }
 
 const topics = [
-  { id: "all", label: "همه" },
-  { id: "Air Pollution Reduction", label: "آلودگی هوا" },
-  { id: "Animal Protection", label: "حفاظت از حیوانات" },
-  { id: "Tree Preservation", label: "حفاظت از درختان" },
-  { id: "Waste Reduction", label: "کاهش زباله" },
-  { id: "Water Conservation", label: "کاهش مصرف آب" },
+  { id: "all", label: "All Stories" },
+  { id: "adventure", label: "Adventure" },
+  { id: "fantasy", label: "Fantasy" },
+  { id: "educational", label: "Educational" },
+  { id: "bedtime", label: "Bedtime" },
 ];
 
 export function TopicFilters({ selectedTopic, onTopicChange }: TopicFiltersProps) {
