@@ -52,26 +52,26 @@ export interface Story {
 }
 
 export const ACADEMIC_APPROACHES = [
-  { id: 'stem', label: 'STEM Education' },
-  { id: 'language', label: 'Language Development' },
-  { id: 'social', label: 'Social Skills' },
-  { id: 'emotional', label: 'Emotional Intelligence' },
-  { id: 'creativity', label: 'Creative Thinking' },
-  { id: 'problem-solving', label: 'Problem Solving' },
+  { id: 'piaget', label: 'نظریه رشد شناختی پیاژه' },
+  { id: 'activeLearning', label: 'نظریه یادگیری فعال' },
+  { id: 'roleModeling', label: 'نقش‌پذیری' },
+  { id: 'multipleIntelligences', label: 'هوش‌های چندگانه گاردنر' },
+  { id: 'vygotsky', label: 'نظریه منطقه تقریبی رشد ویگوتسکی' },
+  { id: 'personalMotivation', label: 'تقویت انگیزه شخصی' },
 ];
 
 export const STORY_TOPICS = [
-  { id: 'adventure', label: 'Adventure' },
-  { id: 'fantasy', label: 'Fantasy' },
-  { id: 'science', label: 'Science' },
-  { id: 'nature', label: 'Nature' },
-  { id: 'daily-life', label: 'Daily Life' },
+  { id: "Water Conservation", label: "مصرف آب" },
+  { id: "Waste Reduction", label: "کاهش زباله" },
+  { id: "Tree Preservation", label: "مراقبت از درختان" },
+  { id: "Animal Protection", label: "حفاظت از حیوانات" },
+  { id: "Air Pollution Reduction", label: "آلودگی هوا" },
 ];
 
 export const LIVING_AREAS = [
-  { id: 'urban', label: 'City' },
-  { id: 'suburban', label: 'Suburb' },
-  { id: 'rural', label: 'Countryside' },
-  { id: 'coastal', label: 'Coastal Area' },
-  { id: 'mountain', label: 'Mountain Region' },
+  { label: 'شهر', id: 'City' },
+  { label: 'حومه', id: 'Suburb' },
+  { label: 'روستا', id: 'Countryside' },
+  { label: 'ساحل', id: 'Coastal Area' },
+  { label: 'کوهستان', id: 'Mountain Region' },
 ];

@@ -31,7 +31,7 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="title">Story Title</Label>
+        <Label htmlFor="title">عنوان قصه</Label>
         <Input
           id="title"
           value={form.title}
@@ -41,7 +41,7 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="age-range">Age Range: {form.ageRange[0]} years</Label>
+        <Label htmlFor="age-range">محدوده سنی: {form.ageRange[0]} سال</Label>
         <Slider
           id="age-range"
           value={form.ageRange}
@@ -61,17 +61,17 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
         >
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="boy" id="boy" />
-            <Label htmlFor="boy">Boy</Label>
+            <Label htmlFor="boy">پسر</Label>
           </div>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="girl" id="girl" />
-            <Label htmlFor="girl">Girl</Label>
+            <Label htmlFor="girl">دختر</Label>
           </div>
         </RadioGroup>
       </div>
 
       <div className="space-y-2">
-        <Label>Academic Approaches</Label>
+        <Label>رویکردهای آکادمیک</Label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {ACADEMIC_APPROACHES.map((approach) => (
             <div key={approach.id} className="flex items-center space-x-2">
@@ -87,13 +87,13 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="topic">Story Topic</Label>
+        <Label htmlFor="topic">موضوع</Label>
         <Select
           value={form.topic}
           onValueChange={(value) => setForm({ ...form, topic: value })}
         >
           <SelectTrigger>
-            <SelectValue placeholder="Select a topic" />
+            <SelectValue placeholder="انتخاب موضوع" />
           </SelectTrigger>
           <SelectContent>
             {STORY_TOPICS.map((topic) => (
@@ -106,13 +106,13 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="living-area">Living Area</Label>
+        <Label htmlFor="living-area">محل زندگی</Label>
         <Select
           value={form.livingArea}
           onValueChange={(value) => setForm({ ...form, livingArea: value })}
         >
           <SelectTrigger>
-            <SelectValue placeholder="Select living area" />
+            <SelectValue placeholder="انتخاب محل زندگی" />
           </SelectTrigger>
           <SelectContent>
             {LIVING_AREAS.map((area) => (
@@ -125,12 +125,12 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="characters">Main Characters</Label>
+        <Label htmlFor="characters">شخصیت اصلی</Label>
         <Input
           id="characters"
           value={form.characters}
           onChange={(e) => setForm({ ...form, characters: e.target.value })}
-          placeholder="Describe your characters"
+          placeholder="نام شخصیت اصلی"
         />
       </div>
 

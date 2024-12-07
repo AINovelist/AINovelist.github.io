@@ -10,10 +10,10 @@ interface StoryFiltersProps {
 export function StoryFilters({ className }: StoryFiltersProps) {
   return (
     <Card className={cn("p-6", className)}>
-      <h2 className="mb-4 text-lg font-semibold">Filters</h2>
+      <h2 className="mb-4 text-lg font-semibold">فیلترها</h2>
       <div className="space-y-6">
         <div className="space-y-2">
-          <Label>Age Range</Label>
+          <Label>محدوده سنی</Label>
           <Slider defaultValue={[6]} min={3} max={12} step={1} />
         </div>
         {/* Add more filters as needed */}

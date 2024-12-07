@@ -13,15 +13,15 @@ interface StoryDetailProps {
 }
 
 const IMAGE_STYLES = [
-  { id: 'storybook_illustration', label: 'Storybook' },
-  { id: 'cartoon', label: 'Cartoon' },
-  { id: 'watercolor', label: 'Watercolor' },
-  { id: '3d_rendered', label: '3D' },
-  { id: 'vector_art', label: 'Vector' },
-  { id: 'chibi', label: 'Chibi' },
-  { id: 'flat_design', label: 'Flat' },
-  { id: 'hand_drawn', label: 'Hand Drawn' },
-  { id: 'real', label: 'Real' },
+  { id: 'storybook_illustration', label: 'کتاب قصه' },
+  { id: 'cartoon', label: 'کارتونی' },
+  { id: 'watercolor', label: 'آبرنگ' },
+  { id: '3d_rendered', label: 'سه‌بعدی' },
+  { id: 'vector_art', label: 'وکتور' },
+  { id: 'chibi', label: 'فانتزی' },
+  { id: 'flat_design', label: 'تخت' },
+  { id: 'hand_drawn', label: 'دستی' },
+  { id: 'real', label: 'رئال' },
 ] as const;
 
 export function StoryDetail({ story }: StoryDetailProps) {
