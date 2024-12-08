@@ -24,7 +24,7 @@ export function StoryPreview({ form, isLoading }: StoryPreviewProps) {
       <h2 className="mb-4 text-xl font-semibold">پیش‌نمایش</h2>
       <div className="space-y-4">
       <div>
-          <h3 className="font-medium">شخصیت‌ها</h3>
+          <h3 className="font-medium">شخصیت‌</h3>
           <p className="text-muted-foreground">{form.characters || 'شخصیتی تعریف نشده'}</p>
         </div>
         <div>
@@ -33,7 +33,7 @@ export function StoryPreview({ form, isLoading }: StoryPreviewProps) {
         </div>
         <div>
           <h3 className="font-medium">موضوع</h3>
-          <p className="text-muted-foreground">{form.theme || 'تعیین نشده'}</p>
+          <p className="text-muted-foreground">{form.topic || 'تعیین نشده'}</p>
         </div>        
         <div>
           <h3 className="font-medium">توضیحات اضافی</h3>

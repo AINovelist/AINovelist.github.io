@@ -41,6 +41,7 @@ export function StoryFormFields({ form, setForm, disabled }: StoryFormFieldsProp
           disabled={disabled}
         />
       </div>
+
       <div className="space-y-2">
         <Label htmlFor="age-range">رده سنی: {form.ageRange[0]} سال</Label>
         <Slider

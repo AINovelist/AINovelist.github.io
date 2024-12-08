@@ -25,9 +25,25 @@ export function StoryCreator() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedStory, setGeneratedStory] = useState<string | null>(null);
   const { toast } = useToast();
-
+  const validateForm = () => {
+    return (
+      form.characters.trim() !== "" &&
+      form.ageRange.length > 0 && // Assuming ageRange is an array
+      form.academicApproaches.length > 0 &&
+      form.topic !== "" &&
+      form.livingArea !== ""
+    );
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateForm()) {
+      toast({
+        title: "لطفاً تمام فیلدها را پر کنید!",
+        description: "تمام فیلدهای الزامی باید پر شوند.",
+        variant: "destructive",
+      });
+      return;
+    }
     setIsGenerating(true);
     
     try {
