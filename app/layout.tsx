@@ -10,8 +10,8 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata: Metadata = {
-  title: 'AiNovelist - AI-Powered Stories for Kids',
-  description: 'Create magical stories for children with the power of AI',
+  title: 'AiNovelist - قصه‌پرداز: سفر به دنیای داستان‌های جادویی برای کودکان',
+  description: 'جرقه‌ای برای تخیل کودک شما، با هر داستانی که هوش مصنوعی خلق می‌کند',
 };
 
 export default function RootLayout({
