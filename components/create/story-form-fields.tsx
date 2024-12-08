@@ -18,9 +18,10 @@ import { ACADEMIC_APPROACHES, STORY_TOPICS, LIVING_AREAS, StoryForm } from "@/li
 interface StoryFormFieldsProps {
   form: StoryForm;
   setForm: (form: StoryForm) => void;
+  disabled?: boolean;
 }
 
-export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
+export function StoryFormFields({ form, setForm, disabled }: StoryFormFieldsProps) {
   const handleCheckboxChange = (approach: string) => {
     const updatedApproaches = form.academicApproaches.includes(approach)
       ? form.academicApproaches.filter((a) => a !== approach)
@@ -31,17 +32,18 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="title">عنوان قصه</Label>
+        <Label htmlFor="title">عنوان داستان</Label>
         <Input
           id="title"
           value={form.title}
           onChange={(e) => setForm({ ...form, title: e.target.value })}
-          placeholder="Enter a title for your story"
+          placeholder="عنوان داستان را وارد کنید"
+          disabled={disabled}
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="age-range">محدوده سنی: {form.ageRange[0]} سال</Label>
+        <Label htmlFor="age-range">رده سنی: {form.ageRange[0]} سال</Label>
         <Slider
           id="age-range"
           value={form.ageRange}
@@ -49,21 +51,23 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
           min={3}
           max={12}
           step={1}
+          disabled={disabled}
         />
       </div>
 
       <div className="space-y-2">
-        <Label>Child Gender</Label>
+        <Label>جنسیت کودک</Label>
         <RadioGroup
           value={form.childGender}
           onValueChange={(value) => setForm({ ...form, childGender: value as 'boy' | 'girl' })}
           className="flex gap-4"
+          disabled={disabled}
         >
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 space-x-reverse">
             <RadioGroupItem value="boy" id="boy" />
             <Label htmlFor="boy">پسر</Label>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 space-x-reverse">
             <RadioGroupItem value="girl" id="girl" />
             <Label htmlFor="girl">دختر</Label>
           </div>
@@ -71,14 +75,15 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
       </div>
 
       <div className="space-y-2">
-        <Label>رویکردهای آکادمیک</Label>
+        <Label>رویکردهای آموزشی</Label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {ACADEMIC_APPROACHES.map((approach) => (
-            <div key={approach.id} className="flex items-center space-x-2">
+            <div key={approach.id} className="flex items-center space-x-2 space-x-reverse">
               <Checkbox
                 id={approach.id}
                 checked={form.academicApproaches.includes(approach.id)}
                 onCheckedChange={() => handleCheckboxChange(approach.id)}
+                disabled={disabled}
               />
               <Label htmlFor={approach.id}>{approach.label}</Label>
             </div>
@@ -87,13 +92,14 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="topic">موضوع</Label>
+        <Label htmlFor="topic">موضوع داستان</Label>
         <Select
           value={form.topic}
           onValueChange={(value) => setForm({ ...form, topic: value })}
+          disabled={disabled}
         >
           <SelectTrigger>
-            <SelectValue placeholder="انتخاب موضوع" />
+            <SelectValue placeholder="موضوع را انتخاب کنید" />
           </SelectTrigger>
           <SelectContent>
             {STORY_TOPICS.map((topic) => (
@@ -106,13 +112,14 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="living-area">محل زندگی</Label>
+        <Label htmlFor="living-area">محیط زندگی</Label>
         <Select
           value={form.livingArea}
           onValueChange={(value) => setForm({ ...form, livingArea: value })}
+          disabled={disabled}
         >
           <SelectTrigger>
-            <SelectValue placeholder="انتخاب محل زندگی" />
+            <SelectValue placeholder="محیط زندگی را انتخاب کنید" />
           </SelectTrigger>
           <SelectContent>
             {LIVING_AREAS.map((area) => (
@@ -125,22 +132,24 @@ export function StoryFormFields({ form, setForm }: StoryFormFieldsProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="characters">شخصیت اصلی</Label>
+        <Label htmlFor="characters">شخصیت‌های اصلی</Label>
         <Input
           id="characters"
           value={form.characters}
           onChange={(e) => setForm({ ...form, characters: e.target.value })}
-          placeholder="نام شخصیت اصلی"
+          placeholder="شخصیت‌های داستان را توصیف کنید"
+          disabled={disabled}
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="additional-notes">Additional Notes</Label>
+        <Label htmlFor="additional-notes">توضیحات اضافی</Label>
         <Textarea
           id="additional-notes"
           value={form.additionalNotes}
           onChange={(e) => setForm({ ...form, additionalNotes: e.target.value })}
-          placeholder="Any special requests or additional details"
+          placeholder="هر توضیح اضافی که می‌خواهید"
+          disabled={disabled}
         />
       </div>
     </div>

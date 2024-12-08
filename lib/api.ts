@@ -1,7 +1,8 @@
-import { APIStory, Story } from './types';
+import { APIStory, Story, StoryForm } from './types';
 
 const API_URL = 'https://github-worker.javidmomeni.workers.dev/';
 const IMAGE_BASE_URL = 'https://raw.githubusercontent.com/AINovelist/stories/refs/heads/main/kids';
+const BUILD_URL = 'https://aibots.kharcoin.info/ai-story/build';
 
 export async function fetchStories(): Promise<Story[]> {
   const response = await fetch(API_URL);
@@ -51,4 +52,26 @@ function formatTitle(filename: string): string {
 function extractAgeFromFilename(filename: string): number {
   const match = filename.match(/^(\d+)-/);
   return match ? parseInt(match[1], 10) : 6;
+}
+
+export async function createStory(formData: StoryForm): Promise<any> {
+  try {
+    const response = await fetch(BUILD_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response) {
+      throw new Error(`HTTP error! status: ${response}`);
+    }
+
+    const data = await response.json();
+    return data.aiResponse;
+  } catch (error) {
+    console.error('Error creating story:', error);
+    throw error;
+  }
 }
