@@ -4,6 +4,8 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { Vazirmatn } from 'next/font/google';
+import { GoogleTagManager } from '@next/third-parties/google';
+
 const vazirmatn = Vazirmatn({
   subsets: ['latin'],
   variable: '--font-vazirmatn',
@@ -28,6 +30,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <Toaster />
+        <GoogleTagManager gtmId="GTM-NFMFJJH5" />
       </body>
     </html>
   );
