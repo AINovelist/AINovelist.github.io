@@ -91,7 +91,7 @@ export function StoryFormFields({ form, setForm, disabled }: StoryFormFieldsProp
         </div>
       </div>
 
-      <div className="space-y-2">
+      {/* <div className="space-y-2">
         <Label htmlFor="topic">موضوع داستان</Label>
         <Select
           value={form.topic}
@@ -129,7 +129,51 @@ export function StoryFormFields({ form, setForm, disabled }: StoryFormFieldsProp
             ))}
           </SelectContent>
         </Select>
-      </div>   
+      </div>    */}
+
+<div className="space-y-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+            <Label htmlFor="topic">موضوع داستان</Label>
+            <Select
+                value={form.topic}
+                onValueChange={(value) => setForm({ ...form, topic: value })}
+                disabled={disabled}
+            >
+                <SelectTrigger>
+                    <SelectValue placeholder="موضوع را انتخاب کنید" />
+                </SelectTrigger>
+                <SelectContent>
+                    {STORY_TOPICS.map((topic) => (
+                        <SelectItem key={topic.id} value={topic.id}>
+                            {topic.label}
+                        </SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
+        </div>
+
+        <div>
+            <Label htmlFor="living-area">محیط زندگی</Label>
+            <Select
+                value={form.livingArea}
+                onValueChange={(value) => setForm({ ...form, livingArea: value })}
+                disabled={disabled}
+            >
+                <SelectTrigger>
+                    <SelectValue placeholder="محیط زندگی را انتخاب کنید" />
+                </SelectTrigger>
+                <SelectContent>
+                    {LIVING_AREAS.map((area) => (
+                        <SelectItem key={area.id} value={area.id}>
+                            {area.label}
+                        </SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
+        </div>
+    </div>
+</div>
 
       <div className="space-y-2">
         <Label htmlFor="additional-notes">توضیحات اضافی</Label>
