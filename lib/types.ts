@@ -7,7 +7,6 @@ export interface Feature {
 }
 
 export interface StoryForm {
-  title: string;
   ageRange: number[];
   theme: string;
   characters: string;

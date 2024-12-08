@@ -23,9 +23,9 @@ export function StoryPreview({ form, isLoading }: StoryPreviewProps) {
     <Card className="p-6">
       <h2 className="mb-4 text-xl font-semibold">پیش‌نمایش</h2>
       <div className="space-y-4">
-        <div>
-          <h3 className="font-medium">عنوان</h3>
-          <p className="text-muted-foreground">{form.title || 'داستان بدون عنوان'}</p>
+      <div>
+          <h3 className="font-medium">شخصیت‌ها</h3>
+          <p className="text-muted-foreground">{form.characters || 'شخصیتی تعریف نشده'}</p>
         </div>
         <div>
           <h3 className="font-medium">رده سنی</h3>
@@ -34,11 +34,7 @@ export function StoryPreview({ form, isLoading }: StoryPreviewProps) {
         <div>
           <h3 className="font-medium">موضوع</h3>
           <p className="text-muted-foreground">{form.theme || 'تعیین نشده'}</p>
-        </div>
-        <div>
-          <h3 className="font-medium">شخصیت‌ها</h3>
-          <p className="text-muted-foreground">{form.characters || 'شخصیتی تعریف نشده'}</p>
-        </div>
+        </div>        
         <div>
           <h3 className="font-medium">توضیحات اضافی</h3>
           <p className="text-muted-foreground">{form.additionalNotes || 'بدون توضیحات'}</p>

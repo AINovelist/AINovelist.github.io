@@ -31,17 +31,16 @@ export function StoryFormFields({ form, setForm, disabled }: StoryFormFieldsProp
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <Label htmlFor="title">عنوان داستان</Label>
+       <div className="space-y-2">
+        <Label htmlFor="characters">شخصیت‌های اصلی</Label>
         <Input
-          id="title"
-          value={form.title}
-          onChange={(e) => setForm({ ...form, title: e.target.value })}
-          placeholder="عنوان داستان را وارد کنید"
+          id="characters"
+          value={form.characters}
+          onChange={(e) => setForm({ ...form, characters: e.target.value })}
+          placeholder="شخصیت‌های داستان را توصیف کنید"
           disabled={disabled}
         />
       </div>
-
       <div className="space-y-2">
         <Label htmlFor="age-range">رده سنی: {form.ageRange[0]} سال</Label>
         <Slider
@@ -129,18 +128,7 @@ export function StoryFormFields({ form, setForm, disabled }: StoryFormFieldsProp
             ))}
           </SelectContent>
         </Select>
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="characters">شخصیت‌های اصلی</Label>
-        <Input
-          id="characters"
-          value={form.characters}
-          onChange={(e) => setForm({ ...form, characters: e.target.value })}
-          placeholder="شخصیت‌های داستان را توصیف کنید"
-          disabled={disabled}
-        />
-      </div>
+      </div>   
 
       <div className="space-y-2">
         <Label htmlFor="additional-notes">توضیحات اضافی</Label>

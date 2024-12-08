@@ -11,8 +11,7 @@ import { createStory } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
 
 export function StoryCreator() {
-  const [form, setForm] = useState<StoryForm>({
-    title: '',
+  const [form, setForm] = useState<StoryForm>({    
     ageRange: [6],
     theme: '',
     characters: '',
