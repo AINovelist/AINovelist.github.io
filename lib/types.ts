@@ -31,7 +31,10 @@ export interface StoryImages {
 
 export interface APIStory {
   name: string;
+  type: string;
+  download_url: string;
   topic: string;
+  topicSlug: string;
   images: StoryImages;
 }
 
@@ -42,6 +45,7 @@ export interface Story {
   ageRange: number;
   theme: string;
   topic: string;
+  topicSlug: string;
   coverImage: string;
   images?: StoryImages;
   content?: string;
@@ -74,3 +78,8 @@ export const LIVING_AREAS = [
   { label: 'ساحل', id: 'Coastal Area' },
   { label: 'کوهستان', id: 'Mountain Region' },
 ];
+
+export interface StoryDetail {
+  content: string;
+  images: StoryImages;
+}

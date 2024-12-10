@@ -1,4 +1,4 @@
-import { fetchStories } from '@/lib/api';
+import { fetchStories, fetchStoryDetail } from '@/lib/api';
 import { StoryDetail } from '@/components/library/story-detail';
 import { notFound } from 'next/navigation';
 
@@ -16,6 +16,12 @@ export default async function StoryPage({ params }: { params: { id: string } }) 
   if (!story) {
     notFound();
   }
-
-  return <StoryDetail story={story} />;
+  const storyDetail = await fetchStoryDetail(story.topicSlug, story.id);
+  const fullStory = {
+    ...story,
+    content: storyDetail.content,
+    // images: storyDetail.images,
+  };
+  // return <StoryDetail story={story} />;
+  return <StoryDetail story={fullStory} />;
 }

@@ -1,6 +1,6 @@
-import { APIStory, Story, StoryForm } from './types';
+import { APIStory, Story, StoryDetail, StoryForm } from './types';
 
-const API_URL = 'https://github-worker.javidmomeni.workers.dev/';
+const API_URL = 'https://novelist-api.alexa.ir/';
 const IMAGE_BASE_URL = 'https://raw.githubusercontent.com/AINovelist/stories/refs/heads/main/kids';
 const BUILD_URL = 'https://aibots.kharcoin.info/ai-story/build';
 
@@ -15,6 +15,7 @@ export async function fetchStories(): Promise<Story[]> {
     ageRange: extractAgeFromFilename(item.name),
     theme: item.topic,
     topic: item.topic,
+    topicSlug: item.topicSlug,
     coverImage: getImageUrl(item.topic, item.name, '3d_rendered'),
     images: {
       ...item.images,
@@ -72,6 +73,18 @@ export async function createStory(formData: StoryForm): Promise<any> {
     return data.aiResponse;
   } catch (error) {
     console.error('Error creating story:', error);
+    throw error;
+  }
+}
+
+export async function fetchStoryDetail(topicSlug: string, storyId: string): Promise<StoryDetail> {
+  try {
+    const response = await fetch(`${API_URL}topic/${topicSlug}/${storyId}`);
+    console.log(response);
+    console.error(response);
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching story detail:', error);
     throw error;
   }
 }
