@@ -44,9 +44,10 @@ export function StoryLibrary({ initialStories }: StoryLibraryProps) {
 
   const handleTopicChange = (topic: string) => {
     setSelectedTopic(topic);
+    console.log(topic);
     setCurrentPage(1);
   };
-
+  console.log(paginatedStories);
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

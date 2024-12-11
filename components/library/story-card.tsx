@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Story } from '@/lib/types';
+import { Story, topicTranslations } from '@/lib/types';
+import { translate } from '@/lib/utils';
 
 interface StoryCardProps {
   story: Story;
@@ -40,9 +41,9 @@ const triplet = (e1: number, e2: number, e3: number) =>
         <CardContent>
           <p className="text-sm text-muted-foreground">{story.description}</p>
           <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
-            <span>Age: {story.ageRange}+</span>
-            <span>•</span>
-            <span>{story.theme}</span>
+            <span>سن: {story.ageRange}+</span>
+            
+            <span className="bg-primary text-secondary rounded-lg px-1 py-1 text-xs">{translate(story.theme, topicTranslations)}</span>
           </div>
         </CardContent>
       </Card>

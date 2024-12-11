@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { Story, StoryImages } from "@/lib/types";
+import { Story, StoryImages, topicTranslations } from "@/lib/types";
 import { useState } from "react";
 import Markdown from "react-markdown";
 import { format, parseISO } from "date-fns";
@@ -29,25 +29,18 @@ const IMAGE_STYLES = [
 
 export function StoryDetail({ story }: StoryDetailProps) {
   const details = extractDetails(story.content);
+  const nonamestory = details.map(({ story }) => story);
   const initialStyle = story.images ? "3d_rendered" : "3d_rendered"; // Default style
   const [selectedStyle, setSelectedStyle] =
     useState<keyof StoryImages>(initialStyle);
-  const createdAt = extractDateFromContent(story.content);
+  const createdAt = extractDateFromContent(nonamestory[0]);
   const formattedCreatedAt = createdAt
     ? format(parseISO(createdAt), "MMMM d, yyyy")
     : null;
   const contentWithoutDate =
-    createdAt && story.content
-      ? story.content.replace(`Created on: ${createdAt}`, "").trim()
-      : story.content || "";
-
-  const livingPlacesTranslations = {
-    "Air Pollution Reduction": "کاهش آلودگی هوا",
-    "Water Conservation": "کاهش مصرف آب",
-    "Waste Reduction": "تولید زباله کمتر",
-    "Tree Preservation": "حفاظت از درختان",
-    "Animal Protection": "حفاظت از حیوانات",
-  };
+    createdAt && nonamestory[0]
+      ? nonamestory[0].replace(`Created on: ${createdAt}`, "").trim()
+      : nonamestory[0] || "";
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -79,12 +72,17 @@ export function StoryDetail({ story }: StoryDetailProps) {
                   ? detail.age.toString()
                   : "Unknown"}{" "}
                 ساله در {detail.livingPlace} برای{" "}
-                {translate(story.theme, livingPlacesTranslations)}
+                {translate(story.theme, topicTranslations)}
               </h1>
             </div>
           ))}
 
           <div className="flex flex-wrap gap-2 mb-6">
+          {formattedCreatedAt && (
+              <span className="bg-primary text-secondary rounded-lg px-3 py-3 text-sm">
+                {formattedCreatedAt}
+              </span>
+            )}
             {IMAGE_STYLES.map((style) => (
               <Button
                 key={style.id}
@@ -97,13 +95,6 @@ export function StoryDetail({ story }: StoryDetailProps) {
                 {style.label}
               </Button>
             ))}
-          </div>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {formattedCreatedAt && (
-              <span className="bg-primary text-secondary px-3 py-1 rounded-full text-sm">
-                {formattedCreatedAt}
-              </span>
-            )}
           </div>
           {contentWithoutDate && (
             <div className="prose max-w-none">

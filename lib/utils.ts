@@ -1,17 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { livingPlacesTranslations } from "./types";
 
-const livingPlacesTranslations = {
-  City: "شهر",
-  Coast: "ساحل",
-  Suburb: "حومه",
-  Suburbs: "حومه",
-  Village: "روستا",
-  Countryside: "روستایی",
-  "Coastal Area": "ساحل",
-  "Mountain Region": "کوهستان",
-  "Mountainous Area": "کوهستان",
-};
 
 export function translate(
   text: string,
@@ -43,6 +33,7 @@ export function extractDetails(content: string | undefined) {
       name,
       age: parseInt(age),
       livingPlace: translate(livingPlace, livingPlacesTranslations),
+      story : content.replace(regex, '').trim()
     };
   });
 }

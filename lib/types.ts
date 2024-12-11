@@ -83,3 +83,23 @@ export interface StoryDetail {
   content: string;
   images: StoryImages;
 }
+
+export const livingPlacesTranslations = {
+  City: "شهر",
+  Coast: "ساحل",
+  Suburb: "حومه",
+  Suburbs: "حومه",
+  Village: "روستا",
+  Countryside: "روستایی",
+  "Coastal Area": "ساحل",
+  "Mountain Region": "کوهستان",
+  "Mountainous Area": "کوهستان",
+};
+
+export const topicTranslations = {
+  "Air Pollution Reduction": "کاهش آلودگی هوا",
+  "Water Conservation": "کاهش مصرف آب",
+  "Waste Reduction": "تولید زباله کمتر",
+  "Tree Preservation": "حفاظت از درختان",
+  "Animal Protection": "حفاظت از حیوانات",
+};

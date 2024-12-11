@@ -1,4 +1,5 @@
-import { APIStory, Story, StoryDetail, StoryForm } from './types';
+import { APIStory, Story, StoryDetail, StoryForm, topicTranslations } from './types';
+import { translate } from './utils';
 
 const API_URL = 'https://novelist-api.alexa.ir/';
 const IMAGE_BASE_URL = 'https://raw.githubusercontent.com/AINovelist/stories/refs/heads/main/kids';
@@ -7,7 +8,7 @@ const BUILD_URL = 'https://aibots.kharcoin.info/ai-story/build';
 export async function fetchStories(): Promise<Story[]> {
   const response = await fetch(API_URL);
   const data: APIStory[] = await response.json();
-  
+  // const description = `قصه‌ای درباره‌ی ${translate(item.topic, topicTranslations)}`;
   return data.map((item) => ({
     id: item.name.replace('.md', ''),
     title: formatTitle(item.name),
