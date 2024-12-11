@@ -9,7 +9,7 @@ import { Story, StoryImages } from "@/lib/types";
 import { useState } from "react";
 import Markdown from "react-markdown";
 import { format, parseISO } from "date-fns";
-import { extractDateFromContent, extractDetails } from "@/lib/utils";
+import { extractDateFromContent, extractDetails, translate } from "@/lib/utils";
 
 interface StoryDetailProps {
   story: Story;
@@ -41,6 +41,14 @@ export function StoryDetail({ story }: StoryDetailProps) {
       ? story.content.replace(`Created on: ${createdAt}`, "").trim()
       : story.content || "";
 
+  const livingPlacesTranslations = {
+    "Air Pollution Reduction": "کاهش آلودگی هوا",
+    "Water Conservation": "کاهش مصرف آب",
+    "Waste Reduction": "تولید زباله کمتر",
+    "Tree Preservation": "حفاظت از درختان",
+    "Animal Protection": "حفاظت از حیوانات",
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <Link href="/library">
@@ -70,7 +78,8 @@ export function StoryDetail({ story }: StoryDetailProps) {
                 {typeof detail.age === "number"
                   ? detail.age.toString()
                   : "Unknown"}{" "}
-                ساله در {detail.livingPlace} برای {story.theme}
+                ساله در {detail.livingPlace} برای{" "}
+                {translate(story.theme, livingPlacesTranslations)}
               </h1>
             </div>
           ))}

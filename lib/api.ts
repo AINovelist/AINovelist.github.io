@@ -80,8 +80,6 @@ export async function createStory(formData: StoryForm): Promise<any> {
 export async function fetchStoryDetail(topicSlug: string, storyId: string): Promise<StoryDetail> {
   try {
     const response = await fetch(`${API_URL}topic/${topicSlug}/${storyId}`);
-    console.log(response);
-    console.error(response);
     return response.json();
   } catch (error) {
     console.error('Error fetching story detail:', error);

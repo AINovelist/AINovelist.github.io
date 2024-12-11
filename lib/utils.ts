@@ -1,7 +1,26 @@
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
-export const livingPlaces = ["City", "Suburb", "Countryside", "Coastal Area", "Mountain Region"];
+const livingPlacesTranslations = {
+  City: "شهر",
+  Coast: "ساحل",
+  Suburb: "حومه",
+  Suburbs: "حومه",
+  Village: "روستا",
+  Countryside: "روستایی",
+  "Coastal Area": "ساحل",
+  "Mountain Region": "کوهستان",
+  "Mountainous Area": "کوهستان",
+};
+
+export function translate(
+  text: string,
+  translations: { [key: string]: string }
+) {
+  return Object.keys(translations).reduce((result, key) => {
+    return result.replace(key, translations[key]);
+  }, text);
+}
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,17 +38,18 @@ export function extractDetails(content: string | undefined) {
     const name = match[1];
     const age = match[2];
     const livingPlace = match[3];
-    console.log(match);
-    // const [name, age] = nameAndAge.split('-');
+
     return {
       name,
       age: parseInt(age),
-      livingPlace,
+      livingPlace: translate(livingPlace, livingPlacesTranslations),
     };
   });
 }
 
-export function extractDateFromContent(content: string | undefined): string | null {
+export function extractDateFromContent(
+  content: string | undefined
+): string | null {
   if (!content) {
     return null;
   }
