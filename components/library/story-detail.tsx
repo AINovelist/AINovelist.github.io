@@ -9,6 +9,7 @@ import { Story, StoryImages } from "@/lib/types";
 import { useState } from "react";
 import Markdown from "react-markdown";
 import { format, parseISO } from "date-fns";
+import { extractDateFromContent, extractDetails } from "@/lib/utils";
 
 interface StoryDetailProps {
   story: Story;
@@ -26,16 +27,8 @@ const IMAGE_STYLES = [
   { id: "real", label: "رئال" },
 ] as const;
 
-function extractDateFromContent(content: string | undefined): string | null {
-  if (!content) {
-    return null;
-  }
-  const dateRegex = /Created on: (\d{4}-\d{2}-\d{2})/;
-  const match = content.match(dateRegex);
-  return match ? match[1] : null;
-}
-
 export function StoryDetail({ story }: StoryDetailProps) {
+  const details = extractDetails(story.content);
   const initialStyle = story.images ? "3d_rendered" : "3d_rendered"; // Default style
   const [selectedStyle, setSelectedStyle] =
     useState<keyof StoryImages>(initialStyle);
@@ -70,7 +63,17 @@ export function StoryDetail({ story }: StoryDetailProps) {
           )}
         </div>
         <div className="p-6">
-          <h1 className="text-3xl font-bold mb-4">{story.title}</h1>
+          {details.map((detail, index) => (
+            <div key={index}>
+              <h1 className="text-3xl font-bold mb-4">
+                قصه‌ی {detail.name} :{" "}
+                {typeof detail.age === "number"
+                  ? detail.age.toString()
+                  : "Unknown"}{" "}
+                ساله در {detail.livingPlace} برای {story.theme}
+              </h1>
+            </div>
+          ))}
 
           <div className="flex flex-wrap gap-2 mb-6">
             {IMAGE_STYLES.map((style) => (
@@ -92,22 +95,7 @@ export function StoryDetail({ story }: StoryDetailProps) {
                 {formattedCreatedAt}
               </span>
             )}
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
-              سن: {story.ageRange}+
-            </span>
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
-              {story.theme}
-            </span>
-            {story.topic && (
-              <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
-                {story.topic}
-              </span>
-            )}
           </div>
-
-          <p className="text-lg text-muted-foreground mb-6">
-            {story.description}
-          </p>
           {contentWithoutDate && (
             <div className="prose max-w-none">
               {contentWithoutDate ? (
