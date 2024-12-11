@@ -7,6 +7,8 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { Story, StoryImages } from '@/lib/types';
 import { useState } from 'react';
+import Markdown from 'react-markdown'
+
 
 interface StoryDetailProps {
   story: Story;
@@ -82,7 +84,9 @@ export function StoryDetail({ story }: StoryDetailProps) {
           <p className="text-lg text-muted-foreground mb-6">{story.description}</p>
           {story.content && (
             <div className="prose max-w-none">
-              <p className="whitespace-pre-line">{story.content}</p>
+              <p className="whitespace-pre-line">                
+                <Markdown>{story.content}</Markdown>
+              </p>
             </div>
           )}
         </div>
