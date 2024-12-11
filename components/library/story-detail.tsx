@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -52,6 +52,20 @@ export function StoryDetail({ story }: StoryDetailProps) {
       </Link>
 
       <Card className="overflow-hidden">
+        <CardHeader className="text-center z-10 -mb-20">
+          <CardTitle className="text-center z-10">
+            {details.map((detail, index) => (
+              <div key={index}>                
+                  قصه‌ی {detail.name} :{" "}
+                  {typeof detail.age === "number"
+                    ? detail.age.toString()
+                    : "Unknown"}{" "}
+                  ساله در {detail.livingPlace} برای{" "}
+                  {translate(story.theme, topicTranslations)}                
+              </div>
+            ))}
+          </CardTitle>
+        </CardHeader>
         <div className="relative aspect-[16/9] w-full">
           {story.images && (
             <Image
@@ -59,30 +73,11 @@ export function StoryDetail({ story }: StoryDetailProps) {
               alt={`${story.title} - ${selectedStyle} style`}
               fill
               className="object-cover"
-              priority
+              // priority
+              loading="lazy"
             />
           )}
-        </div>
-        <div className="p-6">
-          {details.map((detail, index) => (
-            <div key={index}>
-              <h1 className="text-3xl font-bold mb-4">
-                قصه‌ی {detail.name} :{" "}
-                {typeof detail.age === "number"
-                  ? detail.age.toString()
-                  : "Unknown"}{" "}
-                ساله در {detail.livingPlace} برای{" "}
-                {translate(story.theme, topicTranslations)}
-              </h1>
-            </div>
-          ))}
-
-          <div className="flex flex-wrap gap-2 mb-6">
-          {formattedCreatedAt && (
-              <span className="bg-primary text-secondary rounded-lg px-3 py-3 text-sm">
-                {formattedCreatedAt}
-              </span>
-            )}
+          <div className="absolute top-4 right-4 z-10 flex flex-col gap-2 mt-10">
             {IMAGE_STYLES.map((style) => (
               <Button
                 key={style.id}
@@ -95,6 +90,18 @@ export function StoryDetail({ story }: StoryDetailProps) {
                 {style.label}
               </Button>
             ))}
+          </div>
+          <div className="">
+          {formattedCreatedAt && (
+              <span className="absolute bottom-4 left-4 z-10 bg-primary text-secondary rounded-lg px-3 py-3 text-sm">
+                {formattedCreatedAt}
+              </span>
+            )}
+          </div>
+        </div>
+        <div className="p-6">
+          <div className="flex flex-wrap gap-2 mb-6">
+            
           </div>
           {contentWithoutDate && (
             <div className="prose max-w-none">
