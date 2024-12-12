@@ -19,9 +19,12 @@ export async function fetchStories(): Promise<Story[]> {
     topic: item.topic,
     topicSlug: item.topicSlug,
     coverImage: getImageUrl(item.topic, item.name, '3d_rendered'),
-    audioUrl: item.topic === 'Air Pollution Reduction' 
-        ? getAudioUrl(item.topic, item.name.replace('.md', ''))
-        : null,
+    audio: item.topic === 'Air Pollution Reduction' 
+    ? {
+        en: getAudioUrl(item.topic, item.name.replace('.md', ''), 'en'),
+        fa: getAudioUrl(item.topic, item.name.replace('.md', ''), 'fa'),
+      }
+    : { en: null, fa: null },
     images: {
       ...item.images,
       cartoon: getImageUrl(item.topic, item.name, 'cartoon'),
@@ -92,6 +95,6 @@ export async function fetchStoryDetail(topicSlug: string, storyId: string): Prom
   }
 }
 
-function getAudioUrl(topic: string, storyName: string): string {
-  return `${AUDIO_BASE_URL}/${encodeURIComponent(topic)}/sounds/en/${storyName}.mp3`;
+function getAudioUrl(topic: string, storyName: string, language: 'en' | 'fa'): string {
+  return `${AUDIO_BASE_URL}/${encodeURIComponent(topic)}/sounds/${language}/${storyName}.mp3`;
 }

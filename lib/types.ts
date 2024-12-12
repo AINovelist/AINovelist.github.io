@@ -6,6 +6,11 @@ export interface Feature {
   icon: LucideIcon;
 }
 
+export interface StoryAudio {
+  en: string | null;
+  fa: string | null;
+}
+
 export interface StoryForm {
   ageRange: number[];
   theme: string;
@@ -52,7 +57,7 @@ export interface Story {
   childGender?: 'boy' | 'girl';
   academicApproaches?: string[];
   livingArea?: string;
-  audioUrl: string | null; // Add this line
+  audio: StoryAudio;
 }
 
 export const ACADEMIC_APPROACHES = [

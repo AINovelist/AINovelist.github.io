@@ -11,6 +11,7 @@ import Markdown from "react-markdown";
 import { format, parseISO } from "date-fns";
 import { extractDateFromContent, extractDetails, translate } from "@/lib/utils";
 import { AudioPlayer } from "./audio-player";
+import { DualAudioPlayer } from "./audio-player/dual-audio-player";
 
 interface StoryDetailProps {
   story: Story;
@@ -42,6 +43,8 @@ export function StoryDetail({ story }: StoryDetailProps) {
     createdAt && nonamestory[0]
       ? nonamestory[0].replace(`Created on: ${createdAt}`, "").trim()
       : nonamestory[0] || "";
+  const hasAudio = story.audio.en || story.audio.fa;
+
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -101,11 +104,11 @@ export function StoryDetail({ story }: StoryDetailProps) {
           </div>
         </div>
         <div className="p-6">
-        {story.audioUrl && (
+         {hasAudio && (
           <div className="mt-8">
-            <AudioPlayer audioUrl={story.audioUrl} />
+            <DualAudioPlayer audio={story.audio} />
           </div>
-        )} 
+        )}
           <div className="flex flex-wrap gap-2 mb-6">          
           </div>
           {contentWithoutDate && (
