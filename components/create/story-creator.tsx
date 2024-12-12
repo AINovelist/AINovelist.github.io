@@ -9,6 +9,7 @@ import { StoryFormFields } from '@/components/create/story-form-fields';
 import { createStory } from '@/lib/api';
 // import { useToast } from '@/components/ui/use-toast';
 import { useToast } from '@/hooks/use-toast';
+import Markdown from 'react-markdown';
 
 export function StoryCreator() {
   const [form, setForm] = useState<StoryForm>({    
@@ -80,7 +81,7 @@ export function StoryCreator() {
           <Card className="p-6">
             <h2 className="text-xl font-bold mb-4">داستان شما</h2>
             <div className="prose max-w-none">
-              <p className="whitespace-pre-line">{generatedStory}</p>
+            <Markdown>{generatedStory}</Markdown>
             </div>
           </Card>
         ) : (
