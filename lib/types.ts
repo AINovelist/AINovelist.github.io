@@ -52,6 +52,7 @@ export interface Story {
   childGender?: 'boy' | 'girl';
   academicApproaches?: string[];
   livingArea?: string;
+  audioUrl: string | null; // Add this line
 }
 
 export const ACADEMIC_APPROACHES = [

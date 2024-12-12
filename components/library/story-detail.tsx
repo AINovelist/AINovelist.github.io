@@ -10,6 +10,7 @@ import { useState } from "react";
 import Markdown from "react-markdown";
 import { format, parseISO } from "date-fns";
 import { extractDateFromContent, extractDetails, translate } from "@/lib/utils";
+import { AudioPlayer } from "./audio-player";
 
 interface StoryDetailProps {
   story: Story;
@@ -100,8 +101,12 @@ export function StoryDetail({ story }: StoryDetailProps) {
           </div>
         </div>
         <div className="p-6">
-          <div className="flex flex-wrap gap-2 mb-6">
-            
+        {story.audioUrl && (
+          <div className="mt-8">
+            <AudioPlayer audioUrl={story.audioUrl} />
+          </div>
+        )} 
+          <div className="flex flex-wrap gap-2 mb-6">          
           </div>
           {contentWithoutDate && (
             <div className="prose max-w-none">

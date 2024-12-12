@@ -4,6 +4,7 @@ import { translate } from './utils';
 const API_URL = 'https://novelist-api.alexa.ir/';
 const IMAGE_BASE_URL = 'https://raw.githubusercontent.com/AINovelist/stories/refs/heads/main/kids';
 const BUILD_URL = 'https://aibots.kharcoin.info/ai-story/build';
+const AUDIO_BASE_URL = 'https://raw.githubusercontent.com/AINovelist/stories/main/kids';
 
 export async function fetchStories(): Promise<Story[]> {
   const response = await fetch(API_URL);
@@ -18,6 +19,9 @@ export async function fetchStories(): Promise<Story[]> {
     topic: item.topic,
     topicSlug: item.topicSlug,
     coverImage: getImageUrl(item.topic, item.name, '3d_rendered'),
+    audioUrl: item.topic === 'Air Pollution Reduction' 
+        ? getAudioUrl(item.topic, item.name.replace('.md', ''))
+        : null,
     images: {
       ...item.images,
       cartoon: getImageUrl(item.topic, item.name, 'cartoon'),
@@ -86,4 +90,8 @@ export async function fetchStoryDetail(topicSlug: string, storyId: string): Prom
     console.error('Error fetching story detail:', error);
     throw error;
   }
+}
+
+function getAudioUrl(topic: string, storyName: string): string {
+  return `${AUDIO_BASE_URL}/${encodeURIComponent(topic)}/sounds/en/${storyName}.mp3`;
 }
