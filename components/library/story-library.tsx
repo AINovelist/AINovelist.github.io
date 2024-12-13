@@ -26,7 +26,6 @@ export function StoryLibrary({ initialStories }: StoryLibraryProps) {
     const matchesTopic = selectedTopic === 'all' || story.topic === selectedTopic;
     return matchesSearch && matchesTopic;
   });
-
   const totalPages = Math.ceil(filteredStories.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedStories = filteredStories.slice(startIndex, startIndex + ITEMS_PER_PAGE);
