@@ -1,8 +1,8 @@
 import { APIStory, Story, StoryDetail, StoryForm, topicTranslations } from './types';
 import { translate } from './utils';
 
-const API_URL = 'https://novelist-api.alexa.ir/';
-const IMAGE_BASE_URL = 'https://raw.githubusercontent.com/AINovelist/stories/refs/heads/main/kids';
+const API_URL = 'api.ainovelist.ir/';
+const IMAGE_BASE_URL = 'https://storage.ainovelist.ir/g/AINovelist/stories/refs/heads/main/kids';
 const BUILD_URL = 'https://aibots.kharcoin.info/ai-story/build';
 const AUDIO_BASE_URL = 'https://raw.githubusercontent.com/AINovelist/stories/main/kids';
 
