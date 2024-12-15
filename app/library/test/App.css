@@ -1,0 +1,24 @@
+.pages {
+    height: 500px;
+    width: 900px;
+}
+
+.page {
+    height: 100%;
+    width: 100%;
+    user-select: none;
+    touch-action: none;
+    border: solid 1px #999;
+}
+
+.page1 {
+    background-color: pink;
+}
+
+.page2 {
+    background-color: yellow;
+}
+
+.page3 {
+    background-color: aqua;
+}
