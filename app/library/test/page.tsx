@@ -22,9 +22,8 @@ const App = () => {
       try {
         const response = await fetch("https://api.ainovelist.ir/paged");
         const data = await response.json();
-
         // Get all available stories
-        { /* @ts-ignore */ }
+        {/* @ts-ignore */}
         const storyListData = data.map((story) => ({
           name: story.name,
           downloadUrl: story.download_url,
@@ -45,11 +44,11 @@ const App = () => {
 
     fetchStory();
   }, []);
-  { /* @ts-ignore */ }
+  {/* @ts-ignore */}
   const handleStoryChange = (storyIndex) => {
     const story = storyList[storyIndex]; // Update selected story using the index
     setSelectedStory(story);
-    { /* @ts-ignore */ }
+    {/* @ts-ignore */}
     setStoryPages(story.content);
     setSelected(0);
   };
@@ -61,7 +60,7 @@ const App = () => {
   const next = () => {
     setSelected((selected) => Math.min(selected + 1, storyPages.length - 1));
   };
-  { /* @ts-ignore */ }
+  {/* @ts-ignore */}
   const handleImageStyleChange = (style) => {
     setImageStyle(style); // Update the selected image style
   };
@@ -111,54 +110,76 @@ const App = () => {
       </div>
       <Card>
         {/* @ts-ignore */}
-        <CardHeader>
-          {/* @ts-ignore */}
-          <CardTitle>{selectedStory.title}</CardTitle>
-        </CardHeader>
+        <CardHeader><CardTitle>{selectedStory.title}</CardTitle></CardHeader>
+
         <div className="pages">
           <FlippingPages
             direction="left-to-right"
             onSwipeEnd={setSelected}
             selected={selected}
           >
-            {storyPages.map((page, index) => (
-              <div
-                key={index}
-                className={`page ${
-                  index === 0 || index === storyPages.length - 1
-                    ? "cover-page"
-                    : ""
-                }`}
+            {/* First Cover Page */}
+            <div className="page cover-page-wrapper">
+              {/* @ts-ignore */}
+              <div style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][0]})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  color: "white",
+                  textAlign: "center",
+                }}
               >
-                {/* First or Last Page: Full-width image with title */}
                 {/* @ts-ignore */}
-                {index === 0 || index === storyPages.length - 1 ? ( <div className="cover-page-wrapper" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][index]})`, height: "100%", }} >
-                    <h1 className="text-4xl font-bold">
-                      {/* @ts-ignore */}
-                      {selectedStory.title}
-                    </h1>
+                <h1 className="text-4xl font-bold">{selectedStory.title}</h1>
+              </div>
+            </div>
+
+            {/* All Story Pages */}
+            {storyPages.map((page, index) => (
+              <div key={index} className="page">
+                <div className="flex">
+                  <div className="w-1/2 p-4">
+                  {/* @ts-ignore */}
+                    <div dangerouslySetInnerHTML={{ __html: page.content.response, }} />
                   </div>
-                ) : (
-                  <div className="flex">
-                    <div className="w-1/2">
-                      {/* @ts-ignore */}
-                      <div className="p-4" dangerouslySetInnerHTML={{ __html: page.content.response, }} />
-                    </div>
-                    <div className="w-1/2">
-                      {/* @ts-ignore */}
-                      <Image src={`https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][index]}`}
-                        alt={`Image for page ${index}`}
-                        className="object-cover w-full h-full"
-                        width={160}
-                        height={90}
-                      />
-                    </div>
+                  <div className="w-1/2 h-full">
+                  {/* @ts-ignore */}
+                    <Image src={`https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][index]}`}
+                      alt={`Image for page ${index}`}
+                      className="w-full h-full object-cover"
+                      width={160}
+                      height={90}
+                    />
                   </div>
-                )}
+                </div>
               </div>
             ))}
+
+            {/* Last Cover Page */}
+            <div className="page cover-page-wrapper">
+              {/* @ts-ignore */}
+              <div style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${ selectedStory.images[imageStyle][ selectedStory.images[imageStyle].length - 1 ] })`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  color: "white",
+                  textAlign: "center",
+                }}
+              >
+                {/* @ts-ignore */}
+                <h1 className="text-4xl font-bold">{selectedStory.title}</h1>
+              </div>
+            </div>
           </FlippingPages>
         </div>
+
+        {/* Conditional Back and Next Buttons */}
         <CardFooter className="flex justify-between items-center">
           {selected > 0 && (
             <Button variant="destructive" size="lg" onClick={back}>
