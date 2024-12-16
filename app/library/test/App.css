@@ -1,24 +1,31 @@
 .pages {
-    height: 500px;
-    width: 900px;
-}
-
-.page {
-    height: 100%;
+    height: 50vh; /* Full viewport height */
+    width: 100%;
+    overflow: hidden; /* Prevent scrolling */
+  }
+  
+  .page {
+    height: 100%; /* Full height for each page */
     width: 100%;
     user-select: none;
     touch-action: none;
     border: solid 1px #999;
-}
-
-.page1 {
+    overflow: hidden; /* Ensure no scroll inside pages */
+  }
+  
+  .cover-page-wrapper {
+    background-size: cover;
+    background-position: center;
+    height: 100%; /* Ensures the image covers the full page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+  }
+  
+  .page1, .page2, .page3 {
     background-color: pink;
-}
-
-.page2 {
     background-color: yellow;
-}
-
-.page3 {
     background-color: aqua;
-}
+  }
