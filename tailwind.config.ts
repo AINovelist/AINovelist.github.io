@@ -65,6 +65,28 @@ const config: Config = {
         },
       },
       keyframes: {
+        slide: {
+          '0%': {
+            transform: 'translateX(0%)',
+            'background-position': 'center bottom',
+          },
+          '25%': {
+            transform: 'translateX(50%)',
+            'background-position': 'center center',
+          },
+          '50%': {
+            transform: 'translateX(100%)',
+            'background-position': 'center top',
+          },
+          '75%': {
+            transform: 'translateX(50%)',
+            'background-position': 'center center',
+          },
+          '100%': {
+            transform: 'translateX(0%)',
+            'background-position': 'center bottom',
+          },
+        },
         'accordion-down': {
           from: {
             height: '0',
@@ -81,10 +103,16 @@ const config: Config = {
             height: '0',
           },
         },
+        slideshow: {
+          '0%, 20%': { opacity: '1' }, // Visible
+          '25%, 100%': { opacity: '0' }, // Fade out
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        slideshow: 'slideshow 20s infinite',
+        slide: 'slide 100s linear infinite',
       },
     },
   },

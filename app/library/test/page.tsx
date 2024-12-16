@@ -58,7 +58,7 @@ const App = () => {
   };
 
   const next = () => {
-    setSelected((selected) => Math.min(selected + 1, storyPages.length - 1));
+    setSelected((selected) => Math.min(selected + 1, storyPages.length + 1));
   };
   {/* @ts-ignore */}
   const handleImageStyleChange = (style) => {
@@ -117,23 +117,29 @@ const App = () => {
             direction="left-to-right"
             onSwipeEnd={setSelected}
             selected={selected}
-          >
-            {/* First Cover Page */}
-            <div className="page cover-page-wrapper">
-              {/* @ts-ignore */}
-              <div style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][0]})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  height: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  color: "white",
-                  textAlign: "center",
-                }}
-              >
+          >         
+           {/* Cover Page as Slideshow */}
+            <div className="relative h-full w-full overflow-hidden">
+              {/* Slideshow Container */}
+              <div className="flex w-[500%] h-full animate-slide">
                 {/* @ts-ignore */}
-                <h1 className="text-4xl font-bold">{selectedStory.title}</h1>
+                {selectedStory.images[imageStyle].map((image, index) => (
+                  <div
+                    key={index}
+                    className="h-full w-[20%] flex-shrink-0 bg-cover bg-center"
+                    style={{
+                      backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${image})`,
+                    }}
+                  ></div>
+                ))}
+              </div>
+
+              {/* Title Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                <h1 className="text-5xl font-extrabold text-white text-center drop-shadow-2xl">
+                  {/* @ts-ignore */}
+                  {selectedStory.title}
+                </h1>
               </div>
             </div>
 
@@ -143,7 +149,9 @@ const App = () => {
                 <div className="flex">
                   <div className="w-1/2 p-4">
                   {/* @ts-ignore */}
-                    <div dangerouslySetInnerHTML={{ __html: page.content.response, }} />
+                  <h4 className="text-2xl font-bold">{page.title}</h4>
+                  {/* @ts-ignore */}
+                    <div className="leading-8" dangerouslySetInnerHTML={{ __html: page.content.response, }} />
                   </div>
                   <div className="w-1/2 h-full">
                   {/* @ts-ignore */}
@@ -159,41 +167,26 @@ const App = () => {
             ))}
 
             {/* Last Cover Page */}
-            <div className="page cover-page-wrapper">
-              {/* @ts-ignore */}
-              <div style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${ selectedStory.images[imageStyle][ selectedStory.images[imageStyle].length - 1 ] })`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  height: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  color: "white",
-                  textAlign: "center",
-                }}
-              >
-                {/* @ts-ignore */}
-                <h1 className="text-4xl font-bold">{selectedStory.title}</h1>
-              </div>
-            </div>
+            {/* @ts-ignore */}
+            <div className="flex items-center justify-center h-full bg-cover bg-center relative" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][selectedStory.images[imageStyle].length - 1]})` }}>
+            <div className="absolute inset-0 bg-black/50 filter brightness-75"></div>
+            <h1 className="relative text-5xl font-extrabold text-white text-center drop-shadow-2xl">
+              پایان داستان
+            </h1>
+          </div>
           </FlippingPages>
         </div>
 
         {/* Conditional Back and Next Buttons */}
         <CardFooter className="flex justify-between items-center">
-          {selected > 0 && (
             <Button variant="destructive" size="lg" onClick={back}>
               <ChevronRight className="h-4 w-4" />
               قبلی
             </Button>
-          )}
-
-          {selected < storyPages.length - 1 && (
             <Button variant="destructive" size="lg" onClick={next}>
               بعدی
               <ChevronLeft className="h-4 w-4" />
             </Button>
-          )}
         </CardFooter>
       </Card>
     </div>
