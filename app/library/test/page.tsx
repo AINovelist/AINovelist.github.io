@@ -24,7 +24,7 @@ const App = () => {
         const data = await response.json();
 
         // Get all available stories
-        {/* @ts-ignore */}
+        { /* @ts-ignore */ }
         const storyListData = data.map((story) => ({
           name: story.name,
           downloadUrl: story.download_url,
@@ -45,11 +45,11 @@ const App = () => {
 
     fetchStory();
   }, []);
-  {/* @ts-ignore */}
+  { /* @ts-ignore */ }
   const handleStoryChange = (storyIndex) => {
     const story = storyList[storyIndex]; // Update selected story using the index
     setSelectedStory(story);
-    {/* @ts-ignore */}
+    { /* @ts-ignore */ }
     setStoryPages(story.content);
     setSelected(0);
   };
@@ -61,10 +61,7 @@ const App = () => {
   const next = () => {
     setSelected((selected) => Math.min(selected + 1, storyPages.length - 1));
   };
-  {
-    /* @ts-ignore */
-  }
-  {/* @ts-ignore */}
+  { /* @ts-ignore */ }
   const handleImageStyleChange = (style) => {
     setImageStyle(style); // Update the selected image style
   };
@@ -135,7 +132,7 @@ const App = () => {
               >
                 {/* First or Last Page: Full-width image with title */}
                 {/* @ts-ignore */}
-                {index === 0 || index === storyPages.length - 1 ? (<div className="cover-page-wrapper" style={{backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][index]})`, height: "100%", }} >
+                {index === 0 || index === storyPages.length - 1 ? ( <div className="cover-page-wrapper" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][index]})`, height: "100%", }} >
                     <h1 className="text-4xl font-bold">
                       {/* @ts-ignore */}
                       {selectedStory.title}
@@ -162,17 +159,20 @@ const App = () => {
             ))}
           </FlippingPages>
         </div>
-
         <CardFooter className="flex justify-between items-center">
-          <Button variant="outline" size="icon" onClick={back}>
-            <ChevronLeft className="h-4 w-4" />
-            قبلی
-          </Button>
+          {selected > 0 && (
+            <Button variant="destructive" size="lg" onClick={back}>
+              <ChevronRight className="h-4 w-4" />
+              قبلی
+            </Button>
+          )}
 
-          <Button variant="outline" size="icon" onClick={next}>
-            بعدی
-            <ChevronRight className="h-4 w-4" />
-          </Button>
+          {selected < storyPages.length - 1 && (
+            <Button variant="destructive" size="lg" onClick={next}>
+              بعدی
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+          )}
         </CardFooter>
       </Card>
     </div>
