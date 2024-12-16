@@ -45,7 +45,7 @@ const App = () => {
 
     fetchStory();
   }, []);
-{/* @ts-ignore */}
+  {/* @ts-ignore */}
   const handleStoryChange = (storyIndex) => {
     const story = storyList[storyIndex]; // Update selected story using the index
     setSelectedStory(story);
@@ -61,7 +61,10 @@ const App = () => {
   const next = () => {
     setSelected((selected) => Math.min(selected + 1, storyPages.length - 1));
   };
-{/* @ts-ignore */}
+  {
+    /* @ts-ignore */
+  }
+  {/* @ts-ignore */}
   const handleImageStyleChange = (style) => {
     setImageStyle(style); // Update the selected image style
   };
@@ -111,7 +114,10 @@ const App = () => {
       </div>
       <Card>
         {/* @ts-ignore */}
-        <CardHeader><CardTitle>{selectedStory.title}</CardTitle></CardHeader>
+        <CardHeader>
+          {/* @ts-ignore */}
+          <CardTitle>{selectedStory.title}</CardTitle>
+        </CardHeader>
         <div className="pages">
           <FlippingPages
             direction="left-to-right"
@@ -119,24 +125,39 @@ const App = () => {
             selected={selected}
           >
             {storyPages.map((page, index) => (
-              <div key={index} className="page">
+              <div
+                key={index}
+                className={`page ${
+                  index === 0 || index === storyPages.length - 1
+                    ? "cover-page"
+                    : ""
+                }`}
+              >
+                {/* First or Last Page: Full-width image with title */}
                 {/* @ts-ignore */}
-                <h4 className="text-xl font-bold">{page.title}</h4>
-                <div className="flex">
-                  <div className="w-1/2 p-4">
-                    {/* @ts-ignore */}
-                    <div dangerouslySetInnerHTML={{__html: page.content.response,}}/>
+                {index === 0 || index === storyPages.length - 1 ? (<div className="cover-page-wrapper" style={{backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][index]})`, height: "100%", }} >
+                    <h1 className="text-4xl font-bold">
+                      {/* @ts-ignore */}
+                      {selectedStory.title}
+                    </h1>
                   </div>
-                  <div className="w-1/2">
-                  {/* @ts-ignore */}
-                    <Image src={`https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][index]}`}
-                      alt={`Image for page ${index}`}
-                      className="w-full h-auto"
-                      width={160}
-                      height={90}
-                    />
+                ) : (
+                  <div className="flex">
+                    <div className="w-1/2">
+                      {/* @ts-ignore */}
+                      <div className="p-4" dangerouslySetInnerHTML={{ __html: page.content.response, }} />
+                    </div>
+                    <div className="w-1/2">
+                      {/* @ts-ignore */}
+                      <Image src={`https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][index]}`}
+                        alt={`Image for page ${index}`}
+                        className="object-cover w-full h-full"
+                        width={160}
+                        height={90}
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             ))}
           </FlippingPages>
