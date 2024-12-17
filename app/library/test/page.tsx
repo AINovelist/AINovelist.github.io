@@ -170,9 +170,24 @@ const App = () => {
             {/* @ts-ignore */}
             <div className="flex items-center justify-center h-full bg-cover bg-center relative" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][selectedStory.images[imageStyle].length - 1]})` }}>
             <div className="absolute inset-0 bg-black/50 filter brightness-75"></div>
-            <h1 className="relative text-5xl font-extrabold text-white text-center drop-shadow-2xl">
-              پایان داستان
-            </h1>
+            
+
+            <div className="grid h-full grid-cols-3 gap-0">
+              <div className="flex flex-col col-span-1">
+                {/* @ts-ignore */}
+                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][0]})` }}></div>
+                {/* @ts-ignore */}
+                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][1]})` }}></div>
+              </div>
+              <div className="align-middle p-4"><h1 className="relative text-5xl font-extrabold text-white text-center drop-shadow-2xl">پایان داستان</h1></div>
+              <div className="flex flex-col col-span-1">
+                {/* @ts-ignore */}
+                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][2]})` }}></div>
+                {/* @ts-ignore */}
+                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][3]})` }}></div>
+              </div>
+            </div>
+            
           </div>
           </FlippingPages>
         </div>
