@@ -7,6 +7,7 @@ import "./App.css";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { topicTranslations } from '../../../lib/types';
 
 const App = () => {
   const [selected, setSelected] = useState(0);
@@ -14,6 +15,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [storyList, setStoryList] = useState([]); // Store all stories here
   const [selectedStory, setSelectedStory] = useState(null);
+  const [basePath, setBasePath] = useState();
   const [imageStyle, setImageStyle] = useState("3d_rendered");
 
   useEffect(() => {
@@ -30,10 +32,14 @@ const App = () => {
           images: story.images,
           content: story.content.pages,
           title: story.content.title,
+          topic: story.topic,
+          imagebase: 'https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/'+story.topic+'/pagedstory'
         }));
 
         setStoryList(storyListData); // Set the stories list
+        console.log(storyListData);
         setSelectedStory(storyListData[0]); // Set the first story as the default
+        setBasePath(storyListData[0].imagebase);
         setStoryPages(storyListData[0].content);
         setLoading(false);
       } catch (error) {
@@ -49,13 +55,15 @@ const App = () => {
     const story = storyList[storyIndex]; // Update selected story using the index
     setSelectedStory(story);
     {/* @ts-ignore */}
+    setBasePath(story.imagebase);
+    {/* @ts-ignore */}
     setStoryPages(story.content);
     setSelected(0);
   };
-
   const back = () => {
     setSelected((selected) => Math.max(selected - 1, 0));
   };
+  
 
   const next = () => {
     setSelected((selected) => Math.min(selected + 1, storyPages.length + 1));
@@ -123,14 +131,7 @@ const App = () => {
               {/* Slideshow Container */}
               <div className="flex w-[500%] h-full animate-slide">
                 {/* @ts-ignore */}
-                {selectedStory.images[imageStyle].map((image, index) => (
-                  <div
-                    key={index}
-                    className="h-full w-[20%] flex-shrink-0 bg-cover bg-center"
-                    style={{
-                      backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${image})`,
-                    }}
-                  ></div>
+                {selectedStory.images[imageStyle].map((image, index) => ( <div key={index} className="h-full w-[20%] flex-shrink-0 bg-cover bg-center" style={{backgroundImage: `url(${basePath}/${image})`, }}></div>
                 ))}
               </div>
 
@@ -140,6 +141,12 @@ const App = () => {
                   {/* @ts-ignore */}
                   {selectedStory.title}
                 </h1>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                <h3 className="font-extrabold text-white text-center drop-shadow-2xl mt-20">
+                  {/* @ts-ignore */}
+                  {selectedStory.topic}
+                </h3>
               </div>
             </div>
 
@@ -155,7 +162,7 @@ const App = () => {
                   </div>
                   <div className="w-1/2 h-full">
                   {/* @ts-ignore */}
-                    <Image src={`https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][index]}`}
+                    <Image src={`https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/${selectedStory.topic}/pagedstory/${selectedStory.images[imageStyle][index]}`}
                       alt={`Image for page ${index}`}
                       className="w-full h-full object-cover"
                       width={160}
@@ -168,23 +175,23 @@ const App = () => {
 
             {/* Last Cover Page */}
             {/* @ts-ignore */}
-            <div className="flex items-center justify-center h-full bg-cover bg-center relative" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][selectedStory.images[imageStyle].length - 1]})` }}>
+            <div className="flex items-center justify-center h-full bg-cover bg-center relative" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/${selectedStory.topic}/pagedstory/${selectedStory.images[imageStyle][selectedStory.images[imageStyle].length - 1]})` }}>
             <div className="absolute inset-0 bg-black/50 filter brightness-75"></div>
             
 
             <div className="grid h-full grid-cols-3 gap-0">
               <div className="flex flex-col col-span-1">
                 {/* @ts-ignore */}
-                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][0]})` }}></div>
+                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/${selectedStory.topic}/pagedstory/${selectedStory.images[imageStyle][0]})` }}></div>
                 {/* @ts-ignore */}
-                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][1]})` }}></div>
+                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/${selectedStory.topic}/pagedstory/${selectedStory.images[imageStyle][1]})` }}></div>
               </div>
               <div className="align-middle p-4"><h1 className="relative text-5xl font-extrabold text-white text-center drop-shadow-2xl">پایان داستان</h1></div>
               <div className="flex flex-col col-span-1">
                 {/* @ts-ignore */}
-                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][2]})` }}></div>
+                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/${selectedStory.topic}/pagedstory/${selectedStory.images[imageStyle][2]})` }}></div>
                 {/* @ts-ignore */}
-                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/Animal%20Protection/pagedstory/${selectedStory.images[imageStyle][3]})` }}></div>
+                <div className="bg-cover bg-center h-full bg-gray-200 p-4" style={{ backgroundImage: `url(https://storage.ainovelist.ir/g/AINovelist/stories/main/kids/${selectedStory.topic}/pagedstory/${selectedStory.images[imageStyle][3]})` }}></div>
               </div>
             </div>
             
@@ -196,10 +203,10 @@ const App = () => {
         <CardFooter className="flex justify-between items-center">
             <Button variant="destructive" size="lg" onClick={back}>
               <ChevronRight className="h-4 w-4" />
-              قبلی
+              صفحه قبل قصه
             </Button>
             <Button variant="destructive" size="lg" onClick={next}>
-              بعدی
+              صفحه بعد قصه
               <ChevronLeft className="h-4 w-4" />
             </Button>
         </CardFooter>
