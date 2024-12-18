@@ -80,7 +80,7 @@ const App = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex">
-        <div className="w-1/2 p-4">
+      <div className="w-[90%] p-4">
           <h2 className="text-2xl font-bold mb-4">قصه‌های موجود</h2>
           <div className="flex space-x-4 mb-4">
             {storyList.map((story, index) => (
@@ -88,6 +88,7 @@ const App = () => {
                 key={index}
                 variant="outline"
                 onClick={() => handleStoryChange(index)}
+                className="ml-2"
               >
                 {/* @ts-ignore */}
                 {story.title}
@@ -95,7 +96,7 @@ const App = () => {
             ))}
           </div>
         </div>
-        <div className="w-1/2 p-4">
+        <div className="w-[10%] p-4">
           <h2 className="text-2xl font-bold mb-4">مدل تصاویر</h2>
           <div className="mb-4">
             <select
